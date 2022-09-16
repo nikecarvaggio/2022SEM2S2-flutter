@@ -12,7 +12,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String results = '';
+  Map results = {"operation":'', "result":''};
+  String resultsRealTime='';
   OperationController operation = new OperationController();
 
   @override
@@ -28,7 +29,8 @@ class _HomePageState extends State<HomePage> {
               color: Colors.red,
               child: Row(
                 children: [
-                  Text("Operaciones"),
+                  
+                  Text(results?["result"]==null ? '' :results?["result"]),
                 ],
               ),
             ),
@@ -38,7 +40,7 @@ class _HomePageState extends State<HomePage> {
             color: Colors.green,
             child: Row(
               children: [
-                Text(results),
+                Text(results?["operation"]==null ? '' :results?["operation"]),
               ],
             ),
           ),
@@ -70,7 +72,11 @@ class _HomePageState extends State<HomePage> {
                     ButtonModel(
                         tittle: String.fromCharCode(8592),
                         method: () {
-                          print("back");
+                          
+                          var temp = results["operation"].toString();
+                          setState(() {
+                            results = operation.addOperation(temp.substring(0,temp.length-1));
+                          });
                         }),
                   ]),
                   rowButtons2([
@@ -95,7 +101,7 @@ class _HomePageState extends State<HomePage> {
                         tittle: String.fromCharCode(0247),
                         method: () {
                           setState(() {
-                            results = operation.addOperation(results + "/");
+                            results = operation.addOperation(results?["operation"] + "/");
                           });
                         }),
                   ]),
@@ -104,28 +110,28 @@ class _HomePageState extends State<HomePage> {
                         tittle: "7",
                         method: () {
                           setState(() {
-                            results = operation.addOperation(results + "7");
+                            results = operation.addOperation(results?["operation"] + "7");
                           });
                         }),
                     ButtonModel(
                         tittle: "8",
                         method: () {
                           setState(() {
-                            results = operation.addOperation(results + "8");
+                            results = operation.addOperation(results?["operation"] + "8");
                           });
                         }),
                     ButtonModel(
                         tittle: "9",
                         method: () {
                           setState(() {
-                            results = operation.addOperation(results + "9");
+                            results = operation.addOperation(results?["operation"] + "9");
                           });
                         }),
                     ButtonModel(
                         tittle: "x",
                         method: () {
                           setState(() {
-                            results = operation.addOperation(results + "*");
+                            results = operation.addOperation(results?["operation"] + "*");
                           });
                         }),
                   ]),
@@ -134,28 +140,28 @@ class _HomePageState extends State<HomePage> {
                         tittle: "4",
                         method: () {
                           setState(() {
-                            results = operation.addOperation(results + "4");
+                            results = operation.addOperation(results?["operation"] + "4");
                           });
                         }),
                     ButtonModel(
                         tittle: "5",
                         method: () {
                           setState(() {
-                            results = operation.addOperation(results + "5");
+                            results = operation.addOperation(results?["operation"] + "5");
                           });
                         }),
                     ButtonModel(
                         tittle: "6",
                         method: () {
                           setState(() {
-                            results = operation.addOperation(results + "6");
+                            results = operation.addOperation(results?["operation"] + "6");
                           });
                         }),
                     ButtonModel(
                         tittle: "-",
                         method: () {
                           setState(() {
-                            results = operation.addOperation(results + "-");
+                            results = operation.addOperation(results?["operation"] + "-");
                           });
                         }),
                   ]),
@@ -164,7 +170,7 @@ class _HomePageState extends State<HomePage> {
                         tittle: "1",
                         method: () {
                           setState(() {
-                            results = operation.addOperation(results + "1");
+                            results = operation.addOperation(results?["operation"] + "1");
                           });
                           ;
                         }),
@@ -172,21 +178,21 @@ class _HomePageState extends State<HomePage> {
                         tittle: "2",
                         method: () {
                           setState(() {
-                            results = operation.addOperation(results + "2");
+                            results = operation.addOperation(results?["operation"] + "2");
                           });
                         }),
                     ButtonModel(
                         tittle: "3",
                         method: () {
                           setState(() {
-                            results = operation.addOperation(results + "3");
+                            results = operation.addOperation(results?["operation"] + "3");
                           });
                         }),
                     ButtonModel(
                         tittle: "+",
                         method: () {
                           setState(() {
-                            results = operation.addOperation(results + "+");
+                            results = operation.addOperation(results?["operation"] + "+");
                           });
                         }),
                   ]),
@@ -210,7 +216,7 @@ class _HomePageState extends State<HomePage> {
                         tittle: "=",
                         method: () {
                           setState(() {
-                            results = results.interpret().toString();
+                            
                           });
                         }),
                   ])
